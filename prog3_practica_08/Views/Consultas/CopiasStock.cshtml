@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Stock de copias";
+    List<Copia> copias = ViewBag.Copias;
+    List<Pelicula> peliculas = ViewBag.Peliculas;
+}
+
+<h1>Stock de copias</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Stock.
+            </th>
+            <th>
+                Titulo de Pelicula
+            </th>
+            <th>
+                Calificacion
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < peliculas.Count; i++)
+        {
+            <tr>
+                <td>
+                    @copias.Count(copia => copia.IdPelicula == peliculas[i].Id)
+                </td>
+                <td>
+                    @peliculas[i].Titulo
+                </td>
+                <td>
+                    @peliculas[i].Calificacion
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

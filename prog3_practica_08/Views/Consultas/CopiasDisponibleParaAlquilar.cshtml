@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Copias para Alquilar";
+    List<Copia> copias = ViewBag.Copias;
+    List<Pelicula> peliculas = ViewBag.Peliculas;
+    List<Alquilere> alquileres = ViewBag.Alquileres;
+    List<Copia> copiasSinAlquilerActivo = new List<Copia>();
+    List<int> idCopiasOcupadas = new List<int>();
+
+    for (int i = 0; i < alquileres.Count; i++)
+    {
+        if (!alquileres[i].FechaEntregada.HasValue)
+        {
+            idCopiasOcupadas.Add(alquileres[i].IdCopia);
+        }
+    }
+
+    foreach(var copia in copias)
+    {
+        if (!idCopiasOcupadas.Contains(copia.Id))
+        {
+            copiasSinAlquilerActivo.Add(copia);
+        }
+    }
+}
+
+<h1>Copias para Alquilar</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID Copia
+            </th>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Año
+            </th>
+            <th>
+                Calificacion
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < copiasSinAlquilerActivo.Count; i++)
+        {
+            <tr>
+                <td>
+                    @copiasSinAlquilerActivo[i].Id
+                </td>
+                <td>
+                    @peliculas.Where(x => x.Id == copiasSinAlquilerActivo[i].IdPelicula).ToList()[0].Titulo
+                </td>
+                <td>
+                    @peliculas.Where(x => x.Id == copiasSinAlquilerActivo[i].IdPelicula).ToList()[0].Anio
+                </td>
+                <td>
+                    @peliculas.Where(x => x.Id == copiasSinAlquilerActivo[i].IdPelicula).ToList()[0].Calificacion
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

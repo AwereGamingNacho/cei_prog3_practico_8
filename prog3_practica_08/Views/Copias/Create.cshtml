@@ -1,0 +1,56 @@
+﻿@model prog3_practica_08.Models.Copia
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Copia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdPelicula" class="control-label"></label>
+                <select asp-for="IdPelicula" class="form-control">
+                    @foreach(var pelicula in ViewBag.Peliculas as List<Pelicula>)
+                    {
+                        <option value="@pelicula.Id">@pelicula.Titulo</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Deteriorada" /> @Html.DisplayNameFor(model => model.Deteriorada)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Formato" class="control-label"></label>
+                <select asp-for="Formato" class="form-control">
+                    <option selected value="DVD">DVD</option>
+                    <option value="BluRay">BluRay</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioAlquiler" class="control-label"></label>
+                <input asp-for="PrecioAlquiler" class="form-control" />
+                <span asp-validation-for="PrecioAlquiler" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

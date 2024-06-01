@@ -1,0 +1,53 @@
+﻿@model IEnumerable<prog3_practica_08.Models.Pelicula>
+
+@{
+    ViewData["Title"] = "Peliculas";
+}
+
+<h1>Peliculas</h1>
+
+<p>
+    <a asp-action="Create">Añadir Pelicula</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Año
+            </th>
+            <th>
+                Calificacion
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calificacion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editas</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

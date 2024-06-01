@@ -1,0 +1,65 @@
+﻿@model IEnumerable<prog3_practica_08.Models.Alquilere>
+
+@{
+    ViewData["Title"] = "Alquileres";
+}
+
+<h1>Alquileres</h1>
+
+<p>
+    <a asp-action="Create">Añadir Alquiler</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Fecha del Alquiler
+            </th>
+            <th>
+                Fecha Limite
+            </th>
+            <th>
+                Fecha Entregada
+            </th>
+            <th>
+                ID del Cliente
+            </th>
+            <th>
+                ID de la Copia
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAlquiler)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTope)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEntregada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdClienteNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCopiaNavigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

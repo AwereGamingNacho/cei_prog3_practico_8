@@ -1,0 +1,90 @@
+﻿@using prog3_practica_08.Classes
+@{
+    ViewData["Title"] = "Historial Alquileres";
+
+    List<HistorialAlquiler> historialAlquileres = ViewBag.Historial;
+}
+
+<h1>Historial de Alquileres</h1>
+
+<div class="form-group">
+    <form id="frmFiltro" method="post" asp-action="SeleccionarFiltro">
+        <div>
+            <label id="lblFiltro">Filtro: </label>
+            @Html.DropDownList("filtro", new List<SelectListItem>{
+            new SelectListItem {Text = "Todos", Value = "todo"},
+            new SelectListItem {Text = "Cliente Especifico", Value = "cliente"},
+            new SelectListItem {Text = "Todos Activos", Value = "activo"},
+            new SelectListItem {Text = "Todos Excedidos", Value = "excedido"}
+            })
+        </div>
+        <div>
+            <label>Cliente (Filtro "Cliente" debe estar seleccionado): </label>
+            <select name="filtroCliente">
+                <option selected hidden value="ninguno">Ninguno</option>
+                @foreach (var cliente in ViewBag.Clientes as List<Cliente>)
+                {
+                    <option value="@cliente.Id">@cliente.Nombre</option>
+                }
+            </select>
+        </div>
+        <input type="submit" value="Filtrar" />
+    </form>
+</div>
+
+@if (ViewBag.SelectedFiltro != null)
+{
+    <p>Filtro seleccionado: @ViewBag.SelectedFiltro</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID De Alquiler</th>
+            <th>Fecha alquilada</th>
+            <th>Fecha limite</th>
+            <th>Fecha entregada</th>
+            <th>Nombre del cliente</th>
+            <th>Telefono</th>
+            <th>Pelicula</th>
+            <th>Formato</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var historial in historialAlquileres)
+        {
+            <tr>
+                <td>
+                    @historial.idAlquiler
+                </td>
+                <td>
+                    @historial.fechaAlquilada
+                </td>
+                <td>
+                    @historial.fechaTope
+                </td>
+                <td>
+                    @historial.fechaEntrega
+                </td>
+                <td>
+                    @historial.nombreCliente
+                </td>
+                <td>
+                    @historial.clienteTelefono
+                </td>
+                <td>
+                    @historial.peliculaTitulo
+                </td>
+                <td>
+                    @historial.formatoPelicula
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+
+
+</script>

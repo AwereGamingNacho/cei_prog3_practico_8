@@ -1,0 +1,59 @@
+﻿@model IEnumerable<prog3_practica_08.Models.Copia>
+
+@{
+    ViewData["Title"] = "Copias";
+}
+
+<h1>Copias</h1>
+
+<p>
+    <a asp-action="Create">Añadir Copia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Deteriorada
+            </th>
+            <th>
+                Formato
+            </th>
+            <th>
+                Precio del Alquiler
+            </th>
+            <th>
+                ID de la Pelicula
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deteriorada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Formato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioAlquiler)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPeliculaNavigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
